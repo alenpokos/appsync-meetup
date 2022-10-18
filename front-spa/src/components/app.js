@@ -48,7 +48,7 @@ export default class App extends Component {
 	};
 	playerAction = (player, position) => {
 		if(this.state.playerName === player) {
-			//return;
+			return;
 		}
 		this.playerPositions[player]=position;
 		let grid = [];
