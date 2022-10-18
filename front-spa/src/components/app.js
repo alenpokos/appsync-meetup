@@ -7,9 +7,16 @@ import {config} from '../config'
 export default class App extends Component {
 	constructor() {
 		super();
-		const playerName = window.prompt("What is your player name?", `Anon${Math.floor(Math.random()*1000)}`)
+		this.gridItems = 20;
+		let playerName = '';
+		if (typeof window !== "undefined") {
+			playerName = window.prompt("What is your player name?")
+ 		}
+		if(playerName === null || playerName === '') {
+			playerName = `Anon${Math.floor(Math.random() * 1000)}`;
+		}
 		let state = { grid: [], myposition: null, playerName:playerName };
-		for(let i = 0; i < 36; i++){
+		for(let i = 0; i < this.gridItems; i++){
 			state.grid[i] = [];
 		}
 		this.state = state;
@@ -41,11 +48,11 @@ export default class App extends Component {
 	};
 	playerAction = (player, position) => {
 		if(this.state.playerName === player) {
-			return;
+			//return;
 		}
 		this.playerPositions[player]=position;
 		let grid = [];
-		for(let i = 0; i < 36; i++){grid[i]=[];}
+		for(let i = 0; i < this.gridItems; i++){grid[i]=[];}
 		for (let [player, position] of Object.entries(this.playerPositions)) {
 			grid[position].push(player);
 		}

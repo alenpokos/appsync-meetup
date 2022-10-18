@@ -17,14 +17,14 @@ html, body {
 
 #app {
 	height: 100%;
-	padding:20px;
 }
 #app > ol {
 	height: 100%;
 	display: grid;
-	grid-template-columns: repeat(6, 1fr);
-	grid-template-rows: repeat(6, auto);
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(5, auto);
 	list-style: none;
+	padding: 10px;
 }
 #app > ol > li {
 	border: 1px #000 solid;
@@ -34,6 +34,8 @@ html, body {
 }
 
 #app > ol > li .player {
+	display:block;
+	overflow-wrap: break-word;
 	padding: 3px 5px;
 	background: #e0e0e0;
 	border-radius: 5px;
