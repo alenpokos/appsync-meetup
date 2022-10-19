@@ -24,7 +24,7 @@ export default class App extends Component {
 		Amplify.configure(config)
 
 		const subscription = subscribe('game',(payload) => {
-			let data = JSON.parse(JSON.parse(payload.data));
+			let data = JSON.parse(payload.data);
 			this.playerAction(data.player, data.position);
 		});
 
@@ -38,12 +38,16 @@ export default class App extends Component {
 		this.setState({ myposition: position });
 
 		let hitlog = this.state.grid[position].join(',');
-		publish('game', `"{\\"position\\":${position}, \\"player\\":\\"${this.state.playerName}\\", \\"hits\\":\\"${hitlog}\\"}"`)
-		.then(res => {
-			console.log(res.data);
+		axios.post(config.be_publish_endpoint, {
+			position: position,
+			player: this.state.playerName,
+			hitlog: hitlog
 		})
-		.catch(err => {
-			console.log(err.message);
+		.then(function (response) {
+			console.log(response);
+		})
+		.catch(function (error) {
+			console.log(error);
 		});
 	};
 	playerAction = (player, position) => {

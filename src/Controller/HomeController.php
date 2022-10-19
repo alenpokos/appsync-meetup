@@ -13,6 +13,6 @@ class HomeController
     public function index(): Response
     {
         // TODO
-        return new Response();
+        return new Response('Hello!');
     }
 }
